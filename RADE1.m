@@ -16,7 +16,7 @@ function [ClearOut] = RADE1(HazyInput)
     histogram(HazyInput);
     title('Histogram of Original Image');
 
-    % Step 1: Luminance-inverted MSR - yuan
+    % Step 1: Luminance-inverted MSR 
     yuvHazyInput = rgb2ycbcr(HazyInput); % separates the image into its luminance (Y) and chrominance (Cb and Cr) components.
     yHazyInput = yuvHazyInput(:,:,1); % Extract the Y channel (luminance)
     invertedYClearOut = computeMSRGray(255 - yHazyInput); % Compute the inverted MSR on the luminance channel
@@ -89,7 +89,7 @@ function [ClearOut] = RADE1(HazyInput)
     histogram(uint8(P * 255));
     title('Histogram of Adaptive Gamma-Corrected Image');
 
-    % Step 4: CLAHE - Contrast-Limited Adaptive Histogram Equalization - thong
+    % Step 4: CLAHE - Contrast-Limited Adaptive Histogram Equalization
     CLAHEImg = zeros(m, n); % Initialize a matrix for CLAHE result
     R = HazyInput(:,:,1); % Red channel of the input image
     G = HazyInput(:,:,2); % Green channel of the input image
@@ -109,7 +109,7 @@ function [ClearOut] = RADE1(HazyInput)
     histogram(CLAHEImg);
     title('Histogram of CLAHE Image');
 
-    % Step 5: Seamless Stitching - zibin
+    % Step 5: Seamless Stitching 
     % Mean-filtered Mask
     meanSize = 100; % Size of the mean filter
     meanFilter = fspecial('average', [meanSize, meanSize]); % Create a mean filter
